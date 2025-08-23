@@ -13,6 +13,7 @@ jobs:
       - name: Build with Buildozer
         uses: ArtemSBulgakov/buildozer-action@v1
         with:
+          workdir: TrueScanner
           command: buildozer android debug
           buildozer_version: master
 
