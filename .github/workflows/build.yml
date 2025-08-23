@@ -13,12 +13,11 @@ jobs:
       - name: Build with Buildozer
         uses: ArtemSBulgakov/buildozer-action@v1
         with:
-          workdir: TrueScanner
           command: buildozer android debug
           buildozer_version: master
 
       - name: Upload Artifact
-        uses: actions/upload-artifact@v4 # <--- ВОТ ИСПРАВЛЕНИЕ. СТАВИМ v4
+        uses: actions/upload-artifact@v4
         with:
           name: TrueScanner-APK
           path: bin/*.apk
