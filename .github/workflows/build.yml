@@ -1,28 +1,25 @@
 name: Kivy Build APK
 
-on: [push]
+on:
+  push:
+    branches: [main]
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout project
+      - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Set up Buildozer environment
+      - name: Build APK with Buildozer
         uses: ArtemSBulgakov/buildozer-action@v1
-        id: buildozer
         with:
-          buildozer_version: master
-
-      - name: Build the APK
-        run: |
-          buildozer android debug
-        working-directory: ${{ github.workspace }} # <--- ВОТ ВСЯ МАГИЯ
+          command: buildozer android debug
+          buildozer_version: stable
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
-          name: TrueScanner-APK
-          path: ${{ github.workspace }}/bin/*.apk
+          name: APK
+          path: bin/*.apk
