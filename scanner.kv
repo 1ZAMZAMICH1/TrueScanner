@@ -1,0 +1,58 @@
+#:kivy 2.0.0
+
+<MainScreen>:
+    BoxLayout:
+        orientation: 'vertical'
+        padding: '10dp'
+        spacing: '10dp'
+        Label:
+            text: 'Мои Шаблоны'
+            font_size: '24sp'
+            size_hint_y: None
+            height: '48dp'
+        ScrollView:
+            Label:
+                text: 'Здесь будет список шаблонов'
+                size_hint_y: None
+                height: self.texture_size[1]
+        BoxLayout:
+            size_hint_y: None
+            height: '48dp'
+            Button:
+                text: 'Создать Шаблон'
+            Button:
+                text: 'Сканировать'
+                on_press: root.manager.current = 'scanner'
+
+<ScannerScreen>:
+    name: 'scanner'
+    BoxLayout:
+        orientation: 'vertical'
+        Camera:
+            id: camera
+            resolution: (1280, 720)
+            play: True
+        Button:
+            text: 'Сделать снимок и проанализировать'
+            size_hint_y: None
+            height: '48dp'
+            on_press: root.capture_and_analyze()
+
+<ResultScreen>:
+    name: 'results'
+    BoxLayout:
+        orientation: 'vertical'
+        padding: '10dp'
+        spacing: '10dp'
+        Image:
+            id: result_image
+        Label:
+            id: result_label
+            text: 'Результат анализа'
+            size_hint_y: None
+            height: '48dp'
+        Button:
+            text: 'Назад'
+            size_hint_y: None
+            height: '48dp'
+            on_press: root.manager.current = 'scanner'
